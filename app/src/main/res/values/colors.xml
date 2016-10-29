@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#2196f3</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="tab_select_text_color">#f18f2d</color>
+    <color name="tab_bg_color">#ffffff</color>
+    <color name="item_news_date_color">#b7b5b5</color>
+</resources>

@@ -53,7 +53,7 @@ public class MainActivity extends BaseActivity
 
         NavigationView navigationView = findView(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        getData();
+
         initViews();
         mAdapter=new ViewPagerAdapter(getSupportFragmentManager(),mTitles);
         mViewPager.setAdapter(mAdapter);
@@ -62,25 +62,7 @@ public class MainActivity extends BaseActivity
 
     }
 
-    private void getData(){
-        Subscriber<News> subscriber=new Subscriber<News>() {
-            @Override
-            public void onCompleted() {
 
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                Log.e("smile","获取失败");
-            }
-
-            @Override
-            public void onNext(News news) {
-                Log.e("smile","获取出来的"+news.getResult().getData().size());
-            }
-        };
-        RetrofitUtil.getInstance().getNews(subscriber);
-    }
 
     private void initViews(){
         for (int i=0;i<ARRYTITLES.length;i++){

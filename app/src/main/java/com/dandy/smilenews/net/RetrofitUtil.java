@@ -1,5 +1,6 @@
 package com.dandy.smilenews.net;
 
+import com.dandy.smilenews.config.Config;
 import com.dandy.smilenews.entity.News;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -22,7 +23,7 @@ import rx.schedulers.Schedulers;
  * Created by Dandy on 2016/10/27.
  */
 
-public class RetrofitUtil {
+public class RetrofitUtil implements Config{
     private static final int DEFAULT_TIMEOUT = 5;
 
     private Retrofit retrofit;
@@ -54,8 +55,8 @@ public class RetrofitUtil {
         return SingletonHolder.INSTANCE;
     }
 
-    public void getNews(Subscriber<News> newsSubscriber){
-        newService.getNews(getParams())
+    public void getNews(Subscriber<News> newsSubscriber,int type){
+        newService.getNews(getParams(type))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -64,9 +65,9 @@ public class RetrofitUtil {
     }
 
 
-    private Map<String,String> getParams(){
+    private Map<String,String> getParams(int type){
         Map<String,String> map=new HashMap<>();
-        map.put("type","shishang");
+        map.put("type",ARRYTYPE[type]);
         map.put("key","0489bcea378ce792facda791d0f1e188");
         return map;
     }

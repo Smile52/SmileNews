@@ -6,4 +6,8 @@
     <color name="tab_select_text_color">#f18f2d</color>
     <color name="tab_bg_color">#ffffff</color>
     <color name="item_news_date_color">#b7b5b5</color>
+    <color name="refresh_color">#c2e447</color>
+    <color name="fragment_bg_color">#dfdcdc</color>
+    <color name="cardview_bg_color">#b6b5b5</color>
+    <color name="white">#ffffff</color>
 </resources>

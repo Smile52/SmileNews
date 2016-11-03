@@ -24,6 +24,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
+            android:transitionName="photos"
             />
         <TextView
             android:id="@+id/item_news_date_tv"

@@ -2,6 +2,7 @@ package com.dandy.smilenews.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,20 +35,53 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view=mInflater.inflate(R.layout.item_news,parent,false);
+
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
 
         holder.mTitle.setText(mData.get(position).getTitle());
         holder.mDate.setText(mData.get(position).getDate());
         Picasso.with(mContext).load(mData.get(position).getThumbnail_pic_s()).into(holder.mImg);
+
+        if (onItemClickListener!=null){
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = holder.getLayoutPosition();
+                    onItemClickListener.onItemClick(holder.itemView, position);
+
+                }
+            });
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    int position = holder.getLayoutPosition();
+                    onItemClickListener.onItemLongClick(holder.itemView, position);
+                    return false;
+                }
+            });
+
+        }
     }
 
     @Override
     public int getItemCount() {
         return mData == null ? 0:mData.size();
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(View view, int position);
+
+        void onItemLongClick(View view, int position);
+    }
+
+    private OnItemClickListener onItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{

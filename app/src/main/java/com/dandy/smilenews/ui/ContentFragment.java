@@ -1,8 +1,13 @@
 package com.dandy.smilenews.ui;
 
 
+import android.annotation.TargetApi;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.PermissionChecker;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -13,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.dandy.smilenews.NewsDetailActivity;
 import com.dandy.smilenews.R;
 import com.dandy.smilenews.adapter.NewsAdapter;
 import com.dandy.smilenews.config.Config;
@@ -27,7 +33,7 @@ import rx.Subscriber;
  * Created by Dandy on 2016/10/28.
  */
 
-public class ContentFragment extends Fragment implements Config{
+public class ContentFragment extends Fragment implements Config ,NewsAdapter.OnItemClickListener{
 
     private int mType;
     private List<News.ResultBean.DataBean> mData;
@@ -97,11 +103,48 @@ public class ContentFragment extends Fragment implements Config{
     }
 
     private void setData(News data){
+        mData=data.getResult().getData();
         mRefreshLayout.setRefreshing(false);
         mAdapter=new NewsAdapter(getContext(),data);
         mShowNews.setLayoutManager(new LinearLayoutManager(getContext()));
         mShowNews.setAdapter(mAdapter);
+        mAdapter.setOnItemClickListener(new NewsAdapter.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(View view, int position) {
+                startDetailActivity(view,mData.get(position));
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+
+            }
+        }) ;
+
     }
 
 
+
+    @Override
+    public void onItemClick(View view, int position) {
+
+
+    }
+
+    @Override
+    public void onItemLongClick(View view, int position) {
+
+    }
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    private void startDetailActivity(View view, News.ResultBean.DataBean bean){
+
+        Intent intent=new Intent(getActivity(), NewsDetailActivity.class);
+        Bundle bundle=new Bundle();
+        bundle.putString("imgurl",bean.getThumbnail_pic_s());
+        bundle.putString("contenturl",bean.getUrl());
+        intent.putExtras(bundle);
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),view.findViewById(R.id.item_news_img),"photos");
+        getContext().startActivity( intent, options.toBundle());
+    }
 }

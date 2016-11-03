@@ -1,10 +1,9 @@
 package com.dandy.smilenews;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
+
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
@@ -20,9 +19,6 @@ import android.view.MenuItem;
 import com.dandy.smilenews.adapter.ViewPagerAdapter;
 import com.dandy.smilenews.base.BaseActivity;
 import com.dandy.smilenews.config.Config;
-import com.dandy.smilenews.entity.News;
-import com.dandy.smilenews.net.RetrofitUtil;
-import com.dandy.smilenews.ui.ContentFragment;
 
 import java.util.ArrayList;
 import java.util.List;

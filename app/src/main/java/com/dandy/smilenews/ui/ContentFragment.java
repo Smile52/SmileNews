@@ -33,7 +33,7 @@ import rx.Subscriber;
  * Created by Dandy on 2016/10/28.
  */
 
-public class ContentFragment extends Fragment implements Config ,NewsAdapter.OnItemClickListener{
+public class ContentFragment extends Fragment implements Config {
 
     private int mType;
     private List<News.ResultBean.DataBean> mData;
@@ -107,6 +107,8 @@ public class ContentFragment extends Fragment implements Config ,NewsAdapter.OnI
         mRefreshLayout.setRefreshing(false);
         mAdapter=new NewsAdapter(getContext(),data);
         mShowNews.setLayoutManager(new LinearLayoutManager(getContext()));
+        int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.item_space);
+        mShowNews.addItemDecoration(new SpacesItemDecoration(spacingInPixels));
         mShowNews.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(new NewsAdapter.OnItemClickListener() {
 
@@ -120,19 +122,6 @@ public class ContentFragment extends Fragment implements Config ,NewsAdapter.OnI
 
             }
         }) ;
-
-    }
-
-
-
-    @Override
-    public void onItemClick(View view, int position) {
-
-
-    }
-
-    @Override
-    public void onItemLongClick(View view, int position) {
 
     }
 

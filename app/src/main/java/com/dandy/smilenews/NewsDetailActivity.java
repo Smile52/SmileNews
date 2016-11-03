@@ -43,10 +43,11 @@ public class NewsDetailActivity extends BaseActivity {
         setSupportActionBar(mToolBar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mToolBarLayout.setTitle("测试");
+
         mToolBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+               onBackPressed();
             }
         });
     }

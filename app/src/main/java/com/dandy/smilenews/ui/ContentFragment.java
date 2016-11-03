@@ -80,6 +80,7 @@ public class ContentFragment extends Fragment implements Config {
             }
         });
         spacingInPixels= getResources().getDimensionPixelSize(R.dimen.item_space);
+        mShowNews.setHasFixedSize(true);
     }
 
     private void getData(){

@@ -10,4 +10,5 @@
     <color name="fragment_bg_color">#dfdcdc</color>
     <color name="cardview_bg_color">#b6b5b5</color>
     <color name="white">#ffffff</color>
+    <color name="line_grey">#b9b7b7</color>
 </resources>

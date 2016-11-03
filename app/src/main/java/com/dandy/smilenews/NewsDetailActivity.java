@@ -11,6 +11,7 @@ import android.webkit.WebView;
 import android.widget.ImageView;
 
 import com.dandy.smilenews.base.BaseActivity;
+import com.dandy.smilenews.config.Config;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -26,13 +27,11 @@ public class NewsDetailActivity extends BaseActivity {
     private CollapsingToolbarLayout mToolBarLayout;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void initContentView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_detail);
         bundle=getIntent().getExtras();
         initViews();
         iniData();
-
     }
 
     private void initViews() {
@@ -53,8 +52,8 @@ public class NewsDetailActivity extends BaseActivity {
     }
 
     private void iniData() {
-        mImgUrl=bundle.getString("imgurl");
-        mContentUrl=bundle.getString("contenturl");
+        mImgUrl=bundle.getString(Config.KEY_IMG_URL);
+        mContentUrl=bundle.getString(Config.KEY_CONTENT_URL);
         Picasso.with(getApplicationContext()).load(mImgUrl).into(mNewsImg);
 
         WebSettings webSettings = mNewsWeb.getSettings();

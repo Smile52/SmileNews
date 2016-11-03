@@ -33,8 +33,7 @@ public class MainActivity extends BaseActivity
     private List<String> mTitles=new ArrayList<>();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void initContentView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findView(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -55,9 +54,7 @@ public class MainActivity extends BaseActivity
         mViewPager.setAdapter(mAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
-
     }
-
 
 
     private void initViews(){

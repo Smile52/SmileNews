@@ -40,6 +40,8 @@ public class ContentFragment extends Fragment implements Config {
     private SwipeRefreshLayout mRefreshLayout;
     private RecyclerView mShowNews;
     private NewsAdapter mAdapter;
+    private int spacingInPixels;
+    private int mCount=0;
 
     public static Fragment instance(int postion){
         ContentFragment fragment=new ContentFragment();
@@ -77,6 +79,7 @@ public class ContentFragment extends Fragment implements Config {
                 getData();
             }
         });
+        spacingInPixels= getResources().getDimensionPixelSize(R.dimen.item_space);
     }
 
     private void getData(){
@@ -103,12 +106,15 @@ public class ContentFragment extends Fragment implements Config {
     }
 
     private void setData(News data){
+
         mData=data.getResult().getData();
         mRefreshLayout.setRefreshing(false);
         mAdapter=new NewsAdapter(getContext(),data);
         mShowNews.setLayoutManager(new LinearLayoutManager(getContext()));
-        int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.item_space);
-        mShowNews.addItemDecoration(new SpacesItemDecoration(spacingInPixels));
+        if (mCount==0){
+            mShowNews.addItemDecoration(new SpacesItemDecoration(spacingInPixels));
+        }
+
         mShowNews.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(new NewsAdapter.OnItemClickListener() {
 
@@ -122,6 +128,7 @@ public class ContentFragment extends Fragment implements Config {
 
             }
         }) ;
+        mCount++;
 
     }
 
@@ -130,8 +137,8 @@ public class ContentFragment extends Fragment implements Config {
 
         Intent intent=new Intent(getActivity(), NewsDetailActivity.class);
         Bundle bundle=new Bundle();
-        bundle.putString("imgurl",bean.getThumbnail_pic_s());
-        bundle.putString("contenturl",bean.getUrl());
+        bundle.putString(Config.KEY_IMG_URL,bean.getThumbnail_pic_s());
+        bundle.putString(Config.KEY_CONTENT_URL,bean.getUrl());
         intent.putExtras(bundle);
         ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),view.findViewById(R.id.item_news_img),"photos");
         getContext().startActivity( intent, options.toBundle());

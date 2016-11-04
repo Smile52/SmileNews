@@ -6,9 +6,9 @@ import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ScrollView;
 
-/**
+
+/**重写NestedScrollView不拦截触摸事件
  * Created by Dandy on 2016/11/4.
  */
 

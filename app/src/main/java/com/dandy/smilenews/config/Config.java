@@ -10,5 +10,6 @@ public interface Config {
      String[] ARRYTYPE={"top","shehui","keji","guonei","guoji","yule","shishang","junshi","tiyu","caijing"};
      String KEY_IMG_URL="imgurl";
      String KEY_CONTENT_URL="contenturl";
+     String KEY_TYPE="type";
 
 }

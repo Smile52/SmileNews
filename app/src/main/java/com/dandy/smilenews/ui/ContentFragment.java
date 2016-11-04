@@ -43,10 +43,12 @@ public class ContentFragment extends Fragment implements Config {
     private int spacingInPixels;
     private int mCount=0;
 
+
     public static Fragment instance(int postion){
         ContentFragment fragment=new ContentFragment();
         Bundle bundle = new Bundle() ;
         bundle.putInt(KEY_POSTION,postion);
+
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -117,6 +119,7 @@ public class ContentFragment extends Fragment implements Config {
         }
 
         mShowNews.setAdapter(mAdapter);
+       // mAdapter.setOnScrollListener(mShowNews);
         mAdapter.setOnItemClickListener(new NewsAdapter.OnItemClickListener() {
 
             @Override
@@ -138,8 +141,9 @@ public class ContentFragment extends Fragment implements Config {
 
         Intent intent=new Intent(getActivity(), NewsDetailActivity.class);
         Bundle bundle=new Bundle();
-        bundle.putString(Config.KEY_IMG_URL,bean.getThumbnail_pic_s());
-        bundle.putString(Config.KEY_CONTENT_URL,bean.getUrl());
+        bundle.putString(KEY_IMG_URL,bean.getThumbnail_pic_s());
+        bundle.putString(KEY_CONTENT_URL,bean.getUrl());
+        bundle.putString(KEY_TYPE,ARRYTITLES[mType]);
         intent.putExtras(bundle);
         ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),view.findViewById(R.id.item_news_img),"photos");
         getContext().startActivity( intent, options.toBundle());

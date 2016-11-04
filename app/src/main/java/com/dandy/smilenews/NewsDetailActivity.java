@@ -5,6 +5,7 @@ import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -41,7 +42,11 @@ public class NewsDetailActivity extends BaseActivity {
         mToolBarLayout=findView(R.id.toolbar_layout);
         setSupportActionBar(mToolBar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mToolBarLayout.setTitle("测试");
+        Log.e("smile","ee"+bundle.getInt(Config.KEY_TYPE));
+        mToolBarLayout.setTitle(bundle.getString(Config.KEY_TYPE));
+
+        mToolBarLayout.setExpandedTitleColor(getResources().getColor(R.color.white));//设置扩展时title文字颜色
+        mToolBarLayout.setCollapsedTitleTextColor(getResources().getColor(R.color.white));
 
         mToolBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

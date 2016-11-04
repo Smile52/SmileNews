@@ -25,7 +25,6 @@ import rx.schedulers.Schedulers;
 
 public class RetrofitUtil implements Config{
     private static final int DEFAULT_TIMEOUT = 5;
-
     private Retrofit retrofit;
     private NewService newService;
 
@@ -64,11 +63,10 @@ public class RetrofitUtil implements Config{
 
     }
 
-
     private Map<String,String> getParams(int type){
         Map<String,String> map=new HashMap<>();
         map.put("type",ARRYTYPE[type]);
-        map.put("key","0489bcea378ce792facda791d0f1e188");
+        map.put("key",KEY_JUHE);
         return map;
     }
 }

@@ -11,5 +11,6 @@ public interface Config {
      String KEY_IMG_URL="imgurl";
      String KEY_CONTENT_URL="contenturl";
      String KEY_TYPE="type";
+     String KEY_JUHE="0489bcea378ce792facda791d0f1e188";
 
 }

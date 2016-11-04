@@ -40,7 +40,7 @@ public class ContentFragment extends Fragment implements Config {
     private SwipeRefreshLayout mRefreshLayout;
     private RecyclerView mShowNews;
     private NewsAdapter mAdapter;
-    private int spacingInPixels;
+    private int mSpacingInPixels;//
     private int mCount=0;
 
 
@@ -81,7 +81,7 @@ public class ContentFragment extends Fragment implements Config {
                 getData();
             }
         });
-        spacingInPixels= getResources().getDimensionPixelSize(R.dimen.item_space);
+        mSpacingInPixels= getResources().getDimensionPixelSize(R.dimen.item_space);
         mShowNews.setHasFixedSize(true);
     }
 
@@ -92,12 +92,12 @@ public class ContentFragment extends Fragment implements Config {
             public void onCompleted() {
 
             }
-
+            //出现异常回调
             @Override
             public void onError(Throwable e) {
                 Log.e("smile","获取失败");
             }
-
+            //获取数据成功后回调
             @Override
             public void onNext(News news) {
                 Log.e("smile","获取出来的"+news.getResult().getData().size());
@@ -114,8 +114,9 @@ public class ContentFragment extends Fragment implements Config {
         mRefreshLayout.setRefreshing(false);
         mAdapter=new NewsAdapter(getContext(),data);
         mShowNews.setLayoutManager(new LinearLayoutManager(getContext()));
+        //避免重复添加间距
         if (mCount==0){
-            mShowNews.addItemDecoration(new SpacesItemDecoration(spacingInPixels));
+            mShowNews.addItemDecoration(new SpacesItemDecoration(mSpacingInPixels));
         }
 
         mShowNews.setAdapter(mAdapter);

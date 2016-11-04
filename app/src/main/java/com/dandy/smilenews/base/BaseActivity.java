@@ -15,15 +15,6 @@ import android.view.WindowManager;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
-    @SuppressWarnings("unchecked")
-    public final <E extends View> E findView(int id){
-        try {
-            return (E) findViewById(id);
-        }catch (ClassCastException e){
-            throw  e;
-        }
-    }
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +23,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected abstract void initContentView(Bundle savedInstanceState);
-
     /**
      * 初始化沉浸式状态栏
      */
@@ -40,7 +30,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){//4.4 全透明状态栏
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
-
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//5.0 全透明实现
             Window window = getWindow();
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -48,6 +37,15 @@ public abstract class BaseActivity extends AppCompatActivity {
                     | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.TRANSPARENT);//calculateStatusColor(Color.WHITE, (int) alphaValue)
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public final <E extends View> E findView(int id){
+        try {
+            return (E) findViewById(id);
+        }catch (ClassCastException e){
+            throw  e;
         }
     }
 }

@@ -49,7 +49,7 @@ public class MainActivity extends BaseActivity
         NavigationView navigationView = findView(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        initViews();
+        initTitle();
         mAdapter=new ViewPagerAdapter(getSupportFragmentManager(),mTitles);
         mViewPager.setAdapter(mAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
@@ -57,7 +57,7 @@ public class MainActivity extends BaseActivity
     }
 
 
-    private void initViews(){
+    private void initTitle(){
         for (int i=0;i<ARRYTITLES.length;i++){
             mTitles.add(ARRYTITLES[i]);
         }
